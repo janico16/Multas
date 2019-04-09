@@ -22,5 +22,8 @@ namespace Multas.Models
         public string LocalEmissao { get; set; }
 
         public DateTime DataValidadeCarta { get; set; }
+
+        //Lista de multas associado ao condutor
+        public ICollection<Multas> ListaDeMultas { get; set; }
     }
 }
