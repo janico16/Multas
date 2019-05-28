@@ -9,7 +9,7 @@ namespace Multas.Models {
    public class MultasDB : DbContext {
 
       // identificar qual o SGBD a usar
-      public MultasDB() : base("MultasDBConnectionString") { }
+      public MultasDB() : base("MultasDbConnectionString") { }
 
       // definir as tabelas da BD
       public DbSet<Condutores> Condutores { get; set; }
