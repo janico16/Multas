@@ -23,12 +23,13 @@
         <dt>
             @Html.DisplayNameFor(model => model.Fotografia)
         </dt>
-
-        @*Indicação da imagem do(a) Agente*@
-        <img src="^/imagens/@Html.DisplayFor(model => model.Fotografia)" 
-             alt="imagem do agente @Html.DisplayFor(model => model.Nome)" 
-             title="@Html.DisplayFor(model => model.Nome)" 
-             width="150" />
+        <dt>
+            @*Indicação da imagem do(a) Agente*@
+            <img src="^/imagens/@Html.DisplayFor(model => model.Fotografia)"
+                 alt="imagem do agente @Html.DisplayFor(model => model.Nome)"
+                 title="@Html.DisplayFor(model => model.Nome)"
+                 width="150" />
+        </dt>
     </dl>
 
     @*##############################################################################*@

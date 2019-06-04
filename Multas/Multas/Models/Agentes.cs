@@ -35,7 +35,9 @@ namespace Multas.Models {
       ///  lista das multas associadas ao Agente
       /// </summary>
       public virtual ICollection<Multas> ListaDeMultas { get; set; }
-      //ste termo 'virtual' vai ativar a funcionalidade de 'lazy loading'
-
+      //se termo 'virtual' vai ativar a funcionalidade de 'lazy loading'
+      
+      [Required]
+      public string UserNameID { get; set; }
    }
 }

@@ -7,22 +7,40 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Multas.Models;
 
 namespace Multas.Controllers {
-   public class AgentesController : Controller {
+    [Authorize] //obriga a que os utilizadores estejam AUTENTICADOS
+    public class AgentesController : Controller {
       private MultasDB db = new MultasDB();
 
       // GET: Agentes
+      [Authorize(Roles ="RecursosHumanos,Agentes")] //Além de AUTENTICADO 
+      //só os utilizadores do tipo RecursosHumanos ou Agentes têm acesso
+      //só precisa de pertencer a uma delas...
+      ////[Authorize(Roles ="RecursosHumanos")]
+      ////[Authorize(Roles ="Agentes")] 
       public ActionResult Index() {
 
          Session["Metodo"] = "";
 
-         return View(db.Agentes.ToList());
+         var lista = db.Agentes
+                .OrderBy(a=>a.Nome)
+                .ToList();
+
+            //Filtrar os dados se a pessoa NÃO pertence ao rolt 'RecursosHumanos'
+            if (!User.IsInRole("RecursosHumanos")) {
+                //Mostrar apenas os dados da pessoa
+                lista = lista.Where(a => a.UserNameID == User.Identity.GetUserId()).ToList();
+            }
+
+         return View(lista);
       }
 
-      // GET: Agentes/Details/5
-      public ActionResult Details(int? id) {
+        // GET: Agentes/Details/5
+        [Authorize]
+        public ActionResult Details(int? id) {
          if(id == null) {
             return RedirectToAction("Index");
          }
@@ -41,6 +59,7 @@ namespace Multas.Controllers {
       /// mostra a view para carregar os dados de um novo Agente
       /// </summary>
       /// <returns></returns>
+      [Authorize(Roles ="RecursosHumanos")]
       public ActionResult Create() {
          return View();
       }
@@ -56,6 +75,7 @@ namespace Multas.Controllers {
       /// <param name="fotografia">ficheiro com a foto do novo Agente</param>
       /// <returns></returns>
 
+      [Authorize(Roles ="RecursosHumanos")]
       [HttpPost]
       [ValidateAntiForgeryToken]
       public ActionResult Create([Bind(Include = "Nome,Esquadra")] Agentes agente, HttpPostedFileBase fotografia) {

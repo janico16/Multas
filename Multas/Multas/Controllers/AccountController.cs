@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Multas.Controllers
 {
-    [Authorize]
+    [Authorize] //obriga a que os utilizadores estejam AUTENTICADOS
     public class AccountController : Controller
     {
         public AccountController()
