@@ -49,6 +49,12 @@ namespace Multas.Controllers {
             return RedirectToAction("Index");
          }
 
+         string nome = agente.UserNameID;
+         if(!User.IsInRole("RecursosHumanos") && nome!=User.Identity.GetUserId())
+         {
+            return RedirectToAction("Index");
+         }
+
          Session["Metodo"] = "";
 
          return View(agente);

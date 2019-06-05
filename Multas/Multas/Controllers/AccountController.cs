@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System;
 
 namespace Multas.Controllers
 {
@@ -153,6 +154,19 @@ namespace Multas.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //Se houver sucesso
+                    //Adicionar, à DB, os dados do novo utilizador
+                    bool resultadoAdicao = adicionarUtilizador(model.Agente, user.Id);
+                    //será que a criação da conta correu bem?
+                    if (resultadoAdicao)
+                    {
+                        //Houve sucesso
+                        //gerar mensagem de boas-vindas
+                    }
+                    else {
+                        //Houve insucesso
+                        //o que fazer?
+                    }
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
@@ -164,6 +178,14 @@ namespace Multas.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        private bool adicionarUtilizador(Agentes agente, string id)
+        {
+            //Concretizar as ações de criação de um novo Agente
+            //na prática, copiar as instruções do método "Create" do controller "Agentes"
+            
+            return false;
         }
 
         //

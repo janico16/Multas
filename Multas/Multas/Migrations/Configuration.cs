@@ -16,7 +16,6 @@ namespace Multas.Migrations {
 
          //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
          //  to avoid creating duplicate seed data.
-
          //*********************************************************************
          // adiciona AGENTES
          var agentes = new List<Agentes> {

@@ -79,6 +79,11 @@ namespace Multas.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        //*****************************************************************************
+        //Adicionar a este viewmodel a hipótese de recolher os dados de um Agente
+
+        public Agentes Agente { get; set; }
     }
 
     public class ResetPasswordViewModel
